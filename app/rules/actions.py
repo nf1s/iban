@@ -1,4 +1,4 @@
-from exceptions import Mod97CheckError, NotAlphaNumericError
+from app.exceptions import Mod97CheckError, NotAlphaNumericError
 
 
 def raise_not_alpha_numeric_error(iban):

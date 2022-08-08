@@ -1,4 +1,4 @@
-import rules
+from app import rules
 
 
 def validate_iban(iban):

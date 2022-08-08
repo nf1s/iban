@@ -1,4 +1,4 @@
-from consts import char_to_num
+from app.consts import char_to_num
 
 
 def convert_iban_to_num(iban: str) -> int:
