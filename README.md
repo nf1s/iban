@@ -1,6 +1,6 @@
-# Iban Validator
+# IBAN Validator
 
-## Simple REST API to handle validation of an Iban (International Bank Account Numbers)
+## Simple REST API to handle validation of an IBAN (International Bank Account Numbers)
 
 ## Requirements
 
@@ -8,11 +8,11 @@
 2. Cross-Platform
 3. Run in docker
 
-### Iban Validation Requirements
+### IBAN Validation Requirements
 
-#### Examples of Iban
+#### Examples of IBAN
 
-| Country        | Iban Example                            |
+| Country        | IBAN Example                            |
 | -------------- | --------------------------------------- |
 | Belgium        | BE71 0961 2345 6769                     |
 | Brazil         | BR15 0000 0000 0000 1093 2840 814 P2    |
