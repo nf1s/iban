@@ -11,12 +11,12 @@ router = APIRouter(prefix="/api/v1")
 @router.post(
     "/iban", response_model=schemas.IbanCheckResponse, status_code=HTTPStatus.OK
 )
-def validate_iban(iban: str):
+def validate_iban(payload: schemas.Payload):
     message = {
         "description": "Validate IBAN",
         "content": {
-            "iban": iban,
-            "valid": controllers.validate_iban(iban),
+            "iban": payload.iban,
+            "valid": controllers.validate_iban(payload.iban),
         },
     }
     return message
