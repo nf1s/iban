@@ -16,6 +16,6 @@ def init_app():
     return app
 
 
+app = init_app()
 if __name__ == "__main__":
-    app = init_app()
     uvicorn.run(app, host="0.0.0.0", port=8000, debug=True)
