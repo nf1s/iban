@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 rules-engine = "*"
 fastapi = "*"
+pydantic = "*"
+uvicorn = "*"
 
 [dev-packages]
 black = "*"
