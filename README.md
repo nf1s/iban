@@ -62,6 +62,14 @@ Example (fictitious United Kingdom bank, sort code 12-34-56, account number
 1. REST API with one endpoint.
 2. Rules Engine Pattern fits the solution.
 
+### MVP
+1. Endpoint
+2. Simple rules engine
+  - Check for Alphanumeric
+  - Check for Mod-97 operation as described in ISO 7064
+3. Docker
+4. Unit Tests
+
 ### Technologies
 1. Python 3.10.5
 2. FastAPI
