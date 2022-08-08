@@ -41,14 +41,14 @@ mod-97 operation (as described in ISO 7064) on it. If the IBAN is valid, the
 remainder equals 1. The algorithm of IBAN validation is as follows
 
 0. Trim and clean white Spaces.
-1. Check for non-alpha-numeric chars -> Invalid
-2. Check length, Min = 15 and Max = 34
-4. Check that the total IBAN length is correct as per the country. If not, the IBAN is invalid.
-5. Move the four initial characters to the end of the string
-6. Replace each letter in the string with two digits, thereby expanding the string, where A = 10, B = 11, ..., Z = 35
-7. Interpret the string as a decimal integer.
-8. Compute the remainder of that number on division by 97 If the remainder is 1, the check digit test is passed and the IBAN might be valid.
-9. Check if the IBAN is valid per country's format.
+1. Check length, Min = 15 and Max = 34
+2. Check for non-alpha-numeric chars -> Invalid
+3. Check that the total IBAN length is correct as per the country. If not, the IBAN is invalid.
+4. Move the four initial characters to the end of the string
+5. Replace each letter in the string with two digits, thereby expanding the string, where A = 10, B = 11, ..., Z = 35
+6. Interpret the string as a decimal integer.
+7. Compute the remainder of that number on division by 97 If the remainder is 1, the check digit test is passed and the IBAN might be valid.
+8. Check if the IBAN is valid per country's format.
 
 Example (fictitious United Kingdom bank, sort code 12-34-56, account number
 98765432):
@@ -59,7 +59,8 @@ Example (fictitious United Kingdom bank, sort code 12-34-56, account number
 • Compute remainder:		3214282912345698765432161182	mod 97 = 1
 
 ## Solution
-1. REST API with one endpoint
+1. REST API with one endpoint.
+2. Rules Engine Pattern fits the solution.
 
 ### Technologies
 1. Python 3.10.5
