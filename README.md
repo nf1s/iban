@@ -1,6 +1,6 @@
-# Iban Validator
+# IBAN Validator
 
-## Simple REST API to handle validation of an Iban (International Bank Account Numbers)
+## Simple REST API to handle validation of an IBAN (International Bank Account Numbers)
 
 ## Requirements
 
@@ -8,11 +8,11 @@
 2. Cross-Platform
 3. Run in docker
 
-### Iban Validation Requirements
+### IBAN Validation Requirements
 
-#### Examples of Iban
+#### Examples of IBAN
 
-| Country        | Iban Example                            |
+| Country        | IBAN Example                            |
 | -------------- | --------------------------------------- |
 | Belgium        | BE71 0961 2345 6769                     |
 | Brazil         | BR15 0000 0000 0000 1093 2840 814 P2    |
@@ -40,24 +40,37 @@ An IBAN is validated by converting it into an integer and performing a basic
 mod-97 operation (as described in ISO 7064) on it. If the IBAN is valid, the
 remainder equals 1. The algorithm of IBAN validation is as follows
 
-1. Check for non-alpha-numeric chars -> Invalid
-2. Check that the total IBAN length is correct as per the country. If not, the IBAN is invalid.
-3. Move the four initial characters to the end of the string
-4. Replace each letter in the string with two digits, thereby expanding the string, where A = 10, B = 11, ..., Z = 35
-5. Interpret the string as a decimal integer.
-6. Compute the remainder of that number on division by 97 If the remainder is 1, the check digit test is passed and the IBAN might be valid.
-7. Check if the IBAN is valid per country's format.
+0. Trim and clean white Spaces.
+1. Check length, Min = 15 and Max = 34
+2. Check for non-alpha-numeric chars -> Invalid
+3. Check that the total IBAN length is correct as per the country. If not, the IBAN is invalid.
+4. Move the four initial characters to the end of the string
+5. Replace each letter in the string with two digits, thereby expanding the string, where A = 10, B = 11, ..., Z = 35
+6. Interpret the string as a decimal integer.
+7. Compute the remainder of that number on division by 97 If the remainder is 1, the check digit test is passed and the IBAN might be valid.
+8. Check if the IBAN is valid per country's format.
 
 Example (fictitious United Kingdom bank, sort code 12-34-56, account number
 98765432):
 
 • IBAN:		GB82 WEST 1234 5698 7654 32	
 • Rearrange:		W E S T12345698765432 G B82	
-• Convert to integer:		3214282912345698765432161182	
+• Convert to integer:		3214282912345698765432161182
 • Compute remainder:		3214282912345698765432161182	mod 97 = 1
 
 ## Solution
-1. REST API with one endpoint
+1. REST API with one endpoint.
+2. Rules Engine Pattern fits the problem.
+
+### MVP
+1. Endpoint
+2. Simple rules engine
+  - Check for Alphanumeric
+  - Check for Mod-97 operation as described in ISO 7064
+  - check for valid IBAN length (per country and in general)
+  - Check Iban has valid format per country
+3. Docker
+4. Unit Tests
 
 ### Technologies
 1. Python 3.10.5
