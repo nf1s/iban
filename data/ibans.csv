@@ -1,4 +1,4 @@
-country_code,country,size,bban_format,iban_fields
+country_code,country,size,bban_format,iban_format
 AD,Andorra,24,8n-12c,ADkk bbbb ssss cccc cccc cccc
 AE,United Arab Emirates,23,3n-16n,AEkk bbb c cccc cccc cccc ccc
 AL,Albania,28,8n-16c,ALkk bbb s sss x cccc cccc cccc cccc
