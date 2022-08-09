@@ -37,5 +37,5 @@ class Payload(BaseModel):
         try:
             IBAN_FORMATS_PER_COUNTRY[country_code.upper()]
         except KeyError:
-            raise CountryDoesNotExist(f"Country code {country_code} is invalid")
+            raise CountryDoesNotExist(iban, f"Country code {country_code} is invalid")
         return iban
