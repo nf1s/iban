@@ -10,6 +10,12 @@ class IbanModel:
     def __init__(self, iban) -> None:
         self.iban = trim(iban)
 
+    def __str__(self) -> str:
+        return self.iban
+
+    def __repr__(self) -> str:
+        return f"<(iban={self.iban})>"
+
     @property
     def country_code(self) -> str:
         return self.iban[:2].upper()
@@ -23,20 +29,24 @@ class IbanModel:
         return self.iban[4:]
 
     @property
-    def country_specific_format(self) -> dict:
-        return IBAN_FORMATS_PER_COUNTRY[self.country_code.upper()]
+    def country_specific_info(self) -> dict:
+        return IBAN_FORMATS_PER_COUNTRY[self.country_code]
 
     @property
     def country(self) -> str:
-        return self.country_specific_format["country"]
+        return self.country_specific_info["country"]
 
     @property
     def country_specific_iban_size(self) -> int:
-        return int(self.country_specific_format["size"])
+        return int(self.country_specific_info["size"])
 
     @property
     def bban_format(self) -> str:
-        return self.country_specific_format["bban_format"]
+        return self.country_specific_info["bban_format"]
+
+    @property
+    def iban_format(self) -> str:
+        return self.country_specific_info["iban_format"]
 
     @property
     def bban_format_to_regex(self):
