@@ -17,7 +17,8 @@ def trim(string: str) -> str:
     return string.replace(" ", "")
 
 
-def get_country_specific_format(country_code: str) -> dict:
+def get_country_specific_format(iban: str) -> dict:
+    country_code = get_country_code(iban)
     return IBAN_FORMATS_PER_COUNTRY[country_code.upper()]
 
 
@@ -29,8 +30,9 @@ def get_bban(iban: str) -> str:
     return iban[4:]
 
 
-def type_to_regex(bban_formats_list):
-    for bban_format in bban_formats_list:
+def bban_format_to_regex(bban_format):
+    bban_format_list = bban_format.split("-")
+    for bban_format in bban_format_list:
         type_ = bban_format[-1]
         size = bban_format[:-1]
         if type_ == "a":
@@ -41,7 +43,6 @@ def type_to_regex(bban_formats_list):
             yield f"[0-9]{{{size}}}"
 
 
-def bban_to_regex(bban_format: str) -> str:
-    bban_formats_list = bban_format.split("-")
-    bban_regex = "".join(list(type_to_regex(bban_formats_list)))
-    return bban_regex
+def get_bban_regex(bban_format: str) -> str:
+    regex = "".join(list(bban_format_to_regex(bban_format)))
+    return f"^{regex}$"
