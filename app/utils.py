@@ -30,9 +30,9 @@ def get_bban(iban: str) -> str:
 
 
 def type_to_regex(bban_formats_list):
-    for x in bban_formats_list:
-        type_ = x[-1]
-        size = x[:-1]
+    for bban_format in bban_formats_list:
+        type_ = bban_format[-1]
+        size = bban_format[:-1]
         if type_ == "a":
             yield f"[A-Z]{{{size}}}"
         elif type_ == "c":
