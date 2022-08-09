@@ -10,8 +10,12 @@ class BaseException(Exception):
         self.kwargs = kwargs
 
 
+class CountryDoesNotExist(BaseException):
+    message = "IBAN is invalid since the country does not exist"
+
+
 class IbanLengthError(BaseException):
-    message = "IBAN length is Invalid, must be between 15 and 34"
+    message = "IBAN length is Invalid"
 
 
 class NotAlphaNumericError(BaseException):
