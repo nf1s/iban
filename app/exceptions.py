@@ -19,3 +19,7 @@ class Mod97CheckError(BaseException):
     message = (
         "mod-97 operation as described in ISO 7064 has failed to validate the Iban"
     )
+
+
+class IbanDoesNotMatchCountryFormatError(BaseException):
+    message = "IBAN Does not match corresponding country format"
