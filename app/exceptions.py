@@ -1,14 +1,21 @@
+from app.models import IbanModel
+
+
 class BaseException(Exception):
     message: str
-    iban: str
+    iban: IbanModel
 
     def __init__(self, iban, message=None, **kwargs):
         super().__init__(iban or self.iban, message or self.message)
         self.kwargs = kwargs
 
 
+class CountryDoesNotExist(BaseException):
+    message = "IBAN is invalid since the country does not exist"
+
+
 class IbanLengthError(BaseException):
-    message = "IBAN length is Invalid, must be between 15 and 34"
+    message = "IBAN length is Invalid"
 
 
 class NotAlphaNumericError(BaseException):
@@ -17,7 +24,7 @@ class NotAlphaNumericError(BaseException):
 
 class Mod97CheckError(BaseException):
     message = (
-        "mod-97 operation as described in ISO 7064 has failed to validate the Iban"
+        "mod-97 operation as described in ISO 7064 has failed to validate the IBAN"
     )
 
 

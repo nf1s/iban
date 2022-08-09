@@ -3,8 +3,8 @@ from http import HTTPStatus
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
-from app.exceptions import (IbanLengthError, Mod97CheckError,
-                            NotAlphaNumericError)
+from app.exceptions import (CountryDoesNotExist, IbanLengthError,
+                            Mod97CheckError, NotAlphaNumericError)
 
 
 def error_response(exc):
@@ -14,7 +14,7 @@ def error_response(exc):
         content={
             "description": "IBAN Validation",
             "content": {
-                "iban": iban,
+                "iban": str(iban),
                 "valid": False,
                 "message": message,
             },
@@ -23,6 +23,16 @@ def error_response(exc):
 
 
 def register_errors(app):
+    @app.exception_handler(ValueError)
+    def value_error_exception_handler(request: Request, exc: ValueError):
+        return error_response(exc)
+
+    @app.exception_handler(CountryDoesNotExist)
+    def country_does_not_exist_exception_handler(
+        request: Request, exc: CountryDoesNotExist
+    ):
+        return error_response(exc)
+
     @app.exception_handler(Mod97CheckError)
     def mod_97_exception_handler(request: Request, exc: Mod97CheckError):
         return error_response(exc)
