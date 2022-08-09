@@ -16,7 +16,7 @@ router = APIRouter(prefix="/api/v1")
 )
 def validate_iban(payload: schemas.Payload):
     message = {
-        "description": "Validate IBAN",
+        "description": "IBAN Validation",
         "content": {
             "iban": payload.iban,
             "valid": controllers.validate_iban(payload.iban),

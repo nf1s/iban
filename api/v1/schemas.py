@@ -7,6 +7,7 @@ from app.utils import trim
 class Content(BaseModel):
     iban: str
     valid: bool
+    message: str
 
 
 class Response(BaseModel):

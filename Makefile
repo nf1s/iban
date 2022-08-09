@@ -7,8 +7,11 @@ run:
 shell:
 	@pipenv run python ipython
 
-test:
-	@pipenv run pytest
+unit-test:
+	@pipenv run pytest tests/unit --cov app/ --no-cov-on-fail --cov-report term-missing
+
+integration-test:
+	@pipenv run pytest tests/integration --cov api/ --no-cov-on-fail --cov-report term-missing
 
 docker-build:
 	@docker-compose build
