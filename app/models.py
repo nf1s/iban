@@ -54,6 +54,7 @@ class IbanModel:
         for bban_format in bban_format_list:
             type_ = bban_format[-1]
             size = bban_format[:-1]
+            # TODO: move to consts with mapping
             if type_ == "a":
                 yield f"[A-Z]{{{size}}}"
             elif type_ == "c":
