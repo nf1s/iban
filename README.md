@@ -55,18 +55,20 @@ Example (fictitious United Kingdom bank, sort code 12-34-56, account number
 
 • IBAN:		GB82 WEST 1234 5698 7654 32	
 • Rearrange:		W E S T12345698765432 G B82	
-• Convert to integer:		3214282912345698765432161182	
+• Convert to integer:		3214282912345698765432161182
 • Compute remainder:		3214282912345698765432161182	mod 97 = 1
 
 ## Solution
 1. REST API with one endpoint.
-2. Rules Engine Pattern fits the solution.
+2. Rules Engine Pattern fits the problem.
 
 ### MVP
 1. Endpoint
 2. Simple rules engine
   - Check for Alphanumeric
   - Check for Mod-97 operation as described in ISO 7064
+  - check for valid IBAN length (per country and in general)
+  - Check Iban has valid format per country
 3. Docker
 4. Unit Tests
 
