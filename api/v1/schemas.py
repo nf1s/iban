@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, validator
 
 from app.consts import IBAN_FORMATS_PER_COUNTRY
-from app.exceptions import CountryDoesNotExist
+from app.exceptions import CountryDoesNotExist, IbanLengthError
 from app.utils import trim
 
 
@@ -26,12 +26,12 @@ class Payload(BaseModel):
     def validate_iban(cls, iban):
         iban = trim(iban)
         if len(iban) > 34:
-            raise ValueError(
+            raise IbanLengthError(
                 iban,
                 f"IBAN length={len(iban)}, IBAN length cannot be greater than 34 characters",
             )
         if len(iban) < 15:
-            raise ValueError(iban, "IBAN length cannot be less than 15 characters")
+            raise IbanLengthError(iban, "IBAN length cannot be less than 15 characters")
 
         country_code = iban[:2]
         try:

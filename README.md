@@ -43,24 +43,31 @@ remainder equals 1. The algorithm of IBAN validation is as follows
 0. Trim and clean white Spaces.
 1. Check length, Min = 15 and Max = 34
 2. Check for non-alpha-numeric chars -> Invalid
-3. Check that the total IBAN length is correct as per the country. If not, the IBAN is invalid.
+3. Check that the total IBAN length is correct as per the country. If not, the
+   IBAN is invalid.
 4. Move the four initial characters to the end of the string
-5. Replace each letter in the string with two digits, thereby expanding the string, where A = 10, B = 11, ..., Z = 35
+5. Replace each letter in the string with two digits, thereby expanding the
+   string, where A = 10, B = 11, ..., Z = 35
 6. Interpret the string as a decimal integer.
-7. Compute the remainder of that number on division by 97 If the remainder is 1, the check digit test is passed and the IBAN might be valid.
+7. Compute the remainder of that number on division by 97 If the remainder is
+   1, the check digit test is passed and the IBAN might be valid.
 8. Check if the IBAN is valid per country's format.
 
 Example (fictitious United Kingdom bank, sort code 12-34-56, account number
 98765432):
 
-• IBAN:		GB82 WEST 1234 5698 7654 32	
-• Rearrange:		W E S T12345698765432 G B82	
-• Convert to integer:		3214282912345698765432161182
-• Compute remainder:		3214282912345698765432161182	mod 97 = 1
+  - IBAN:		GB82 WEST 1234 5698 7654 32
+  - Rearrange:		W E S T12345698765432 G B82	
+  - Convert to integer:		3214282912345698765432161182
+  - Compute remainder:		3214282912345698765432161182	mod 97 = 1
 
 ## Solution
 1. REST API with one endpoint.
 2. Rules Engine Pattern fits the problem.
+
+### Technologies
+1. Python 3.10.5
+2. FastAPI
 
 ### MVP
 1. Endpoint
@@ -72,6 +79,95 @@ Example (fictitious United Kingdom bank, sort code 12-34-56, account number
 3. Docker
 4. Unit Tests
 
-### Technologies
-1. Python 3.10.5
-2. FastAPI
+### Full Solution
+1. Tests with good coverage
+2. Memoization: In memory caching for IBAN results
+3. Refactoring and docstrings
+
+
+## Setup (Locally)
+If you are using docker skip to the docker section
+
+### Requirements
+- python 3.10.5
+- pipenv
+- make
+
+```
+make setup
+```
+
+Run locally
+
+```
+make run
+```
+Run tests
+
+```
+make test
+```
+
+## Using Docker
+
+### Requirements
+1. docker
+2. docker-compose
+
+```
+make docker-run
+```
+Run tests
+
+```
+make docker-test
+```
+
+
+Server will be running at
+
+```
+  http://localhost:8000
+```
+
+#### IBAN endpoint
+
+```
+http://localhost:8000/api/v1/iban
+
+```
+
+### Documentation
+```
+1. openapi.v3 - http://localhost:8000/docs
+2. redoc      - http://localhost:8000/redoc
+```
+## Examples
+
+#### CURL
+```
+curl -X 'POST' \
+  'http://localhost:8000/api/v1/iban' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "iban": "GB82 WEST 1234 5698 7654 32"
+}'
+```
+
+#### Httpie
+```
+http http://localhost:8000/api/v1/iban iban="GB82 WEST 1234 5698 7654 32"
+```
+
+#### Response
+```
+{
+  "description": "IBAN Validation",
+  "content": {
+    "iban": "GB82WEST12345698765432",
+    "valid": true,
+    "message": "IBAN validation was successful"
+  }
+}
+```
