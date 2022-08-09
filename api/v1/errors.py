@@ -14,7 +14,7 @@ def error_response(exc):
         content={
             "description": "IBAN Validation",
             "content": {
-                "iban": iban.iban,
+                "iban": str(iban),
                 "valid": False,
                 "message": message,
             },
@@ -23,7 +23,10 @@ def error_response(exc):
 
 
 def register_errors(app):
-    @app.exception_handler(Mod97CheckError)
+    @app.exception_handler(ValueError)
+    def value_error_exception_handler(request: Request, exc: ValueError):
+        return error_response(exc)
+
     def mod_97_exception_handler(request: Request, exc: Mod97CheckError):
         return error_response(exc)
 
