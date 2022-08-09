@@ -2,7 +2,7 @@ setup:
 	@pipenv install --dev --pre
 
 run:
-	@pipenv run uvicorn main:app
+	@pipenv run uvicorn main:app --reload
 
 shell:
 	@pipenv run python ipython
