@@ -23,7 +23,18 @@ class Payload(BaseModel):
     )
 
     @validator("iban")
-    def validate_iban(cls, iban):
+    def validate_iban(cls, iban: str) -> str:
+        """Method validates iban str
+
+        Args:
+            iban(str): iban
+
+        Returns
+            str: validated iban
+
+        Raises:
+            IbanLengthError: when the IBAN's length is < 15 or > 34
+        """
         iban = trim(iban)
         if len(iban) > 34:
             raise IbanLengthError(
