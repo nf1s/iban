@@ -13,11 +13,13 @@ unit-test:
 integration-test:
 	@pipenv run pytest tests/integration --cov api/ --no-cov-on-fail --cov-report term-missing
 
+test: unit-test integration-test
+
 docker-build:
 	@docker-compose build
 
 docker-run:
-	@docker-compose up
+	@docker-compose up --build
 
 docker-shell:
 	@docker-compose run web bash
