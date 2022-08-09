@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, validator
 
 from app.exceptions import IbanLengthError
+from app.utils import trim
 
 
 class Content(BaseModel):
@@ -21,7 +22,7 @@ class Payload(BaseModel):
 
     @validator("iban")
     def validate_iban(cls, iban):
-        iban = iban.replace(" ", "")
+        iban = trim(iban)
         if len(iban) > 34:
             raise IbanLengthError(
                 iban, "IBAN length cannot be greater than 34 characters"

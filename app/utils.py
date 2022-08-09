@@ -11,3 +11,7 @@ def move_the_1st_4_char_to_the_end(iban: str) -> str:
 
 def mod_97(num: int) -> int:
     return num % 97
+
+
+def trim(string: str) -> str:
+    return string.replace(" ", "")
