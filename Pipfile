@@ -13,6 +13,7 @@ uvicorn = "*"
 black = "*"
 pdbpp = "*"
 ipython = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.10"
