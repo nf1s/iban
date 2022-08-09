@@ -9,9 +9,10 @@ def init_app():
     async def health():
         return {"status": "OK"}
 
-    from api.v1 import views
+    from api.v1 import errors, views
 
     app.include_router(views.router)
+    errors.register_errors(app)
 
     return app
 
