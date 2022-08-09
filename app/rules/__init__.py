@@ -3,10 +3,15 @@ from rules_engine import Otherwise, Rule, RulesEngine, then
 from app.rules.actions import (
     raise_iban_does_not_match_country_format_error,
     raise_iban_length_does_not_match_country_length_error,
-    raise_mod_97_check_error, raise_not_alpha_numeric_error)
-from app.rules.conditions import (iban_does_not_match_country_format,
-                                  iban_does_not_match_country_specific_length,
-                                  mod_97_not_eq_to_one, not_alpha_numeric)
+    raise_mod_97_check_error,
+    raise_not_alpha_numeric_error,
+)
+from app.rules.conditions import (
+    iban_does_not_match_country_format,
+    iban_does_not_match_country_specific_length,
+    mod_97_not_eq_to_one,
+    not_alpha_numeric,
+)
 from app.utils import trim
 
 
