@@ -1,5 +1,12 @@
-from app.utils import (convert_iban_to_num, mod_97,
+from app.utils import (convert_iban_to_num, get_bban, get_country_code,
+                       get_country_specific_format, mod_97,
                        move_the_1st_4_char_to_the_end)
+
+
+def iban_does_not_match_country_specific_length(iban: str) -> bool:
+    country_code = get_country_code(iban)
+    country = get_country_specific_format(country_code)
+    return len(iban) != int(country["size"])
 
 
 def not_alpha_numeric(iban: str) -> bool:
