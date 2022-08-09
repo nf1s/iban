@@ -1,3 +1,4 @@
+from functools import lru_cache
 from http import HTTPStatus
 
 from fastapi import APIRouter
@@ -8,6 +9,7 @@ from app import controllers
 router = APIRouter(prefix="/api/v1")
 
 
+@lru_cache(maxsize=100)
 @router.post(
     "/iban",
     response_model=schemas.Response,

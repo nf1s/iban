@@ -81,7 +81,7 @@ Example (fictitious United Kingdom bank, sort code 12-34-56, account number
 
 ### Full Solution
 1. Tests with good coverage
-2. Memoization: In memory caching for IBAN results
+2. In memory caching for IBAN results
 3. Refactoring and docstrings
 
 
