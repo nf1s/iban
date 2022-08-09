@@ -1,7 +1,10 @@
+from functools import lru_cache
+
 from app import rules
 from app.models import IbanModel
 
 
+@lru_cache(maxsize=100)
 def validate_iban(iban) -> bool:
     """Method handles IBAN Rules
 
