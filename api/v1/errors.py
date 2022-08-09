@@ -14,7 +14,7 @@ def error_response(exc):
         content={
             "description": "IBAN Validation",
             "content": {
-                "iban": iban,
+                "iban": iban.iban,
                 "valid": False,
                 "message": message,
             },
