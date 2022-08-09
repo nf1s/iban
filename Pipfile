@@ -13,7 +13,18 @@ uvicorn = "*"
 black = "*"
 pdbpp = "*"
 ipython = "*"
+mypy = "*"
+flake8 = "*"
+flake8-isort = "*" 
+flake8-black = "*"
+colorama = "*"
+
 pytest = "*"
+pytest-sugar = "*"
+pytest-coverage = "*"
+pytest-icdiff = "*"
+codecov = "*"
+
 
 [requires]
 python_version = "3.10"
