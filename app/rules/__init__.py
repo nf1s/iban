@@ -10,6 +10,20 @@ from app.rules.conditions import (alpha_numeric, matches_country_format,
 
 
 def iban(iban: IbanModel) -> bool:
+    """Method handles IBAN Rules
+
+    Args:
+        iban (IbanModel): iban
+
+    Returns:
+        bool: True when IBAN is valid
+
+    Raises:
+        NotAlphaNumericError: when IBAN is not alphanumeric
+        Mod97CheckError: when mod 97 is not equal to 1
+        IbanLengthError: When Iban does not match country specific length
+        IbanDoesNotMatchCountryFormatError: when IBAN format does not match the country
+    """
     return RulesEngine(
         Rule(not_(alpha_numeric), raise_not_alpha_numeric_error),
         Rule(

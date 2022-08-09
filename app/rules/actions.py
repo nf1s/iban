@@ -1,6 +1,9 @@
-from app.exceptions import (IbanDoesNotMatchCountryFormatError,
-                            IbanLengthError, Mod97CheckError,
-                            NotAlphaNumericError)
+from app.exceptions import (
+    IbanDoesNotMatchCountryFormatError,
+    IbanLengthError,
+    Mod97CheckError,
+    NotAlphaNumericError,
+)
 from app.models import IbanModel
 
 
@@ -11,7 +14,7 @@ def raise_not_alpha_numeric_error(iban: IbanModel):
         iban (IbanModel): iban
 
     Raises:
-        exception: NotAlphaNumericError
+        NotAlphaNumericError: when IBAN is not alphanumeric
     """
     raise NotAlphaNumericError(iban)
 
@@ -23,7 +26,7 @@ def raise_mod_97_check_error(iban: IbanModel):
         iban (IbanModel): iban
 
     Raises:
-        exception: Mod97CheckError
+        Mod97CheckError: when mod 97 is not equal to 1
     """
     raise Mod97CheckError(iban)
 
@@ -35,7 +38,7 @@ def raise_iban_length_does_not_match_country_length_error(iban: IbanModel):
         iban (IbanModel): iban
 
     Raises:
-        exception: IbanLengthError
+        IbanLengthError: When Iban does not match country specific length
     """
     raise IbanLengthError(
         iban,
@@ -52,7 +55,7 @@ def raise_iban_does_not_match_country_format_error(iban: IbanModel):
         iban (IbanModel): iban
 
     Raises:
-        exception: IbanDoesNotMatchCountryFormatError
+        IbanDoesNotMatchCountryFormatError: when IBAN format does not match the country
     """
     raise IbanDoesNotMatchCountryFormatError(
         iban,
