@@ -1,7 +1,8 @@
 import re
 from dataclasses import dataclass
 
-from app.consts import IBAN_CHAR_TO_NUM, IBAN_FORMATS_PER_COUNTRY
+from app.consts import (BBAN_TO_REGEX, IBAN_CHAR_TO_NUM,
+                        IBAN_FORMATS_PER_COUNTRY)
 from app.utils import trim
 
 
@@ -54,13 +55,7 @@ class IbanModel:
         for bban_format in bban_format_list:
             type_ = bban_format[-1]
             size = bban_format[:-1]
-            # TODO: move to consts with mapping
-            if type_ == "a":
-                yield f"[A-Z]{{{size}}}"
-            elif type_ == "c":
-                yield f"[A-Za-z0-9]{{{size}}}"
-            elif type_ == "n":
-                yield f"[0-9]{{{size}}}"
+            yield f"{BBAN_TO_REGEX[type_]}{{{size}}}"
 
     @property
     def bban_regex(self) -> str:
