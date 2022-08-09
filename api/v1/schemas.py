@@ -1,4 +1,6 @@
-from pydantic import BaseModel, Field, ValidationError, validator
+from pydantic import BaseModel, Field, validator
+
+from app.exceptions import IbanLengthError
 
 
 class Content(BaseModel):
@@ -6,7 +8,7 @@ class Content(BaseModel):
     valid: bool
 
 
-class IbanCheckResponse(BaseModel):
+class Response(BaseModel):
     description: str
     content: Content
 
@@ -21,7 +23,9 @@ class Payload(BaseModel):
     def validate_iban(cls, iban):
         iban = iban.replace(" ", "")
         if len(iban) > 34:
-            raise ValueError("IBAN length cannot be greater than 34 characters")
+            raise IbanLengthError(
+                iban, "IBAN length cannot be greater than 34 characters"
+            )
         if len(iban) < 15:
-            raise ValueError("IBAN length cannot be less than 15 characters")
+            raise IbanLengthError(iban, "IBAN length cannot be less than 15 characters")
         return iban

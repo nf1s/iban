@@ -7,6 +7,10 @@ class BaseException(Exception):
         self.kwargs = kwargs
 
 
+class IbanLengthError(BaseException):
+    message = "IBAN length is Invalid, must be between 15 and 34"
+
+
 class NotAlphaNumericError(BaseException):
     message = "The IBAN can contain only characters A-Z and 0-9"
 
