@@ -2,7 +2,7 @@
 
 ## Simple REST API to handle validation of an IBAN (International Bank Account Numbers)
 
-![openapi.png](static/openapi.png)
+![redoc.png](static/redoc.png)
 
 ## Requirements
 
@@ -144,6 +144,8 @@ http://localhost:8000/api/v1/iban
 1. openapi.v3 - http://localhost:8000/docs
 2. redoc      - http://localhost:8000/redoc
 ```
+![openapi.png](static/openapi.png)
+
 ## Examples
 
 #### CURL
