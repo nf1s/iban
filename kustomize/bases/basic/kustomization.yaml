@@ -1,0 +1,14 @@
+resources:
+  - api/deployment.yaml
+  - api/hpa.yaml
+  - api/pdb.yaml
+  - api/service.yaml
+configMapGenerator:
+  - name: iban-service
+    envs:
+      - config.env
+secretGenerator:
+  - name: iban-service
+    type: Opaque
+    envs:
+      - secrets.env

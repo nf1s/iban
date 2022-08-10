@@ -1,0 +1,7 @@
+resources:
+  - ../../bases/basic
+configMapGenerator:
+  - name: iban-service
+    behavior: merge
+    envs:
+      - config.env

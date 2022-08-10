@@ -1,0 +1,10 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: iban-api-service
+spec:
+  selector:
+    matchLabels:
+      app: iban-service
+      component: api
+  maxUnavailable: 1
