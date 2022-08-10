@@ -16,6 +16,7 @@ dist
 .venv
 __pycache__
 node_modules
+static
 
 .circleci
 kustomize
