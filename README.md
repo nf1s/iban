@@ -2,7 +2,7 @@
 
 ## Simple REST API to handle validation of an IBAN (International Bank Account Numbers)
 
-![openapi.png](images/openapi.png)
+![openapi.png](static/openapi.png)
 
 ## Requirements
 
