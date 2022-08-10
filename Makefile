@@ -29,3 +29,9 @@ docker-ipython:
 
 docker-test:
 	@docker-compose run web pytest
+
+deploy:
+	@skaffold run
+
+delete:
+	@skaffold delete

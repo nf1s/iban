@@ -42,7 +42,7 @@ remainder equals 1. The algorithm of IBAN validation is as follows
 
 0. Trim and clean white Spaces.
 1. Check length, Min = 15 and Max = 34
-2. Check for non-alpha-numeric chars -> Invalid
+2. Check for non alpha-numeric chars -> Invalid
 3. Check that the total IBAN length is correct as per the country. If not, the
    IBAN is invalid.
 4. Move the four initial characters to the end of the string
@@ -170,4 +170,79 @@ http http://localhost:8000/api/v1/iban iban="GB82 WEST 1234 5698 7654 32"
     "message": "IBAN validation was successful"
   }
 }
+```
+
+
+## Kubernetes
+
+### Requirements
+1. Kubernetes running in (minikube, docker-desktop, rancher .. etc)
+2. kubectl
+3. [skaffold](https://skaffold.dev/)
+
+
+### Deployment
+
+For safety reasons this is a manual step to select the kube context before you
+deploy to avoid accidental deploys to production environments.
+
+Check your current kube context
+
+```
+kubectl config current-context
+```
+If that is your local desired context, for example `minikube`
+change the contexts in `skaffold.yaml` in the end of the file
+
+```
+      kubeContext: dev
+      ...
+      - kubeContext: dev
+
+```
+To
+
+```
+      kubeContext: minikube
+      ...
+      - kubeContext: minikube
+```
+
+To change kube-context (if needed)
+
+```
+kubectl config use-context minikube
+
+```
+Deploy
+
+```
+make deploy
+```
+To check pods
+
+```
+kubectl get pods
+```
+
+To check services
+```
+kubectl get svc
+```
+
+To remove the deployment from k8s
+
+```
+make delete
+```
+
+To reach the endpoint
+
+```
+kubectl port-forward svc/iban-api-service 8000:80
+```
+Then check
+
+```
+http://localhost:8000/api/v1/iban
 ```

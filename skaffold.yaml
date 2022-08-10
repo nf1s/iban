@@ -1,0 +1,18 @@
+apiVersion: skaffold/v1
+kind: Config
+metadata:
+  name: iban-service
+build:
+  artifacts:
+    - image: iban/iban-service
+profiles:
+  - name: dev
+    build:
+      local:
+        push: false
+    deploy:
+      kubeContext: dev
+      kustomize:
+        path: kustomize/overlays/dev/
+    activation:
+      - kubeContext: dev

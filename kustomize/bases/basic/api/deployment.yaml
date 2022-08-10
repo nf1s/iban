@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iban-api-service
+  labels:
+    app: iban-service
+    component: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iban-service
+      component: api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: iban-service
+        component: api
+    spec:
+      containers:
+        - name: app
+          image: iban/iban-service:latest
+          imagePullPolicy: Never
+          command:
+            - uvicorn
+          args:
+            - main:app
+          envFrom:
+            - configMapRef:
+                name: iban-service
+            - secretRef:
+                name: iban-service
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - "sleep 5"
