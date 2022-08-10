@@ -13,7 +13,11 @@ unit-test:
 integration-test:
 	@pipenv run pytest tests/integration --cov api/ --no-cov-on-fail --cov-report term-missing
 
-test: unit-test integration-test
+lint:
+	@pipenv run flake8
+	@pipenv run mypy .
+	
+test: lint unit-test integration-test
 
 docker-build:
 	@docker-compose build
