@@ -23,9 +23,7 @@ class NotAlphaNumericError(BaseException):
 
 
 class Mod97CheckError(BaseException):
-    message = (
-        "mod-97 operation as described in ISO 7064 has failed to validate the IBAN"
-    )
+    message = "mod-97 operation as described in ISO 7064 has failed to validate the IBAN"
 
 
 class IbanDoesNotMatchCountryFormatError(BaseException):

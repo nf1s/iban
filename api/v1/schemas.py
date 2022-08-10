@@ -44,9 +44,9 @@ class Payload(BaseModel):
         if len(iban) < 15:
             raise IbanLengthError(iban, "IBAN length cannot be less than 15 characters")
 
-        country_code = iban[:2]
+        country_code = iban[:2].upper()
         try:
-            IBAN_FORMATS_PER_COUNTRY[country_code.upper()]
+            IBAN_FORMATS_PER_COUNTRY[country_code]
         except KeyError:
             raise CountryDoesNotExist(iban, f"Country code {country_code} is invalid")
         return iban

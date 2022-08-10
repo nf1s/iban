@@ -1,8 +1,7 @@
 import re
 from dataclasses import dataclass
 
-from app.consts import (BBAN_TO_REGEX, IBAN_CHAR_TO_NUM,
-                        IBAN_FORMATS_PER_COUNTRY)
+from app.consts import BBAN_TO_REGEX, IBAN_CHAR_TO_NUM, IBAN_FORMATS_PER_COUNTRY
 from app.utils import trim
 
 

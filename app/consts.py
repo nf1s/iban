@@ -12,9 +12,7 @@ def parse_iban_csv():
 
 IBAN_FORMATS_PER_COUNTRY = parse_iban_csv()
 
-IBAN_CHAR_TO_NUM = {
-    val: str(key) for key, val in enumerate(string.digits + string.ascii_uppercase)
-}
+IBAN_CHAR_TO_NUM = {val: str(key) for key, val in enumerate(string.digits + string.ascii_uppercase)}
 
 ALPHA = "a"
 ALPHANUMERIC = "c"

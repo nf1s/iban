@@ -1,9 +1,12 @@
 import pytest
 
 from app import controllers
-from app.exceptions import (IbanDoesNotMatchCountryFormatError,
-                            IbanLengthError, Mod97CheckError,
-                            NotAlphaNumericError)
+from app.exceptions import (
+    IbanDoesNotMatchCountryFormatError,
+    IbanLengthError,
+    Mod97CheckError,
+    NotAlphaNumericError,
+)
 
 
 def test_iban_controllers(valid_ibans):
