@@ -16,7 +16,7 @@ integration-test:
 lint:
 	@pipenv run flake8
 	@pipenv run mypy .
-	
+
 test: lint unit-test integration-test
 
 docker-build:
