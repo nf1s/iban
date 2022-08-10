@@ -3,10 +3,13 @@ from http import HTTPStatus
 from fastapi import Request
 from fastapi.responses import JSONResponse
 
-from app.exceptions import (CountryDoesNotExist,
-                            IbanDoesNotMatchCountryFormatError,
-                            IbanLengthError, Mod97CheckError,
-                            NotAlphaNumericError)
+from app.exceptions import (
+    CountryDoesNotExist,
+    IbanDoesNotMatchCountryFormatError,
+    IbanLengthError,
+    Mod97CheckError,
+    NotAlphaNumericError,
+)
 
 
 def error_response(exc):
@@ -26,15 +29,11 @@ def error_response(exc):
 
 def register_errors(app):
     @app.exception_handler(NotAlphaNumericError)
-    def not_alpha_numeric_exception_handler(
-        request: Request, exc: NotAlphaNumericError
-    ):
+    def not_alpha_numeric_exception_handler(request: Request, exc: NotAlphaNumericError):
         return error_response(exc)
 
     @app.exception_handler(CountryDoesNotExist)
-    def country_does_not_exist_exception_handler(
-        request: Request, exc: CountryDoesNotExist
-    ):
+    def country_does_not_exist_exception_handler(request: Request, exc: CountryDoesNotExist):
         return error_response(exc)
 
     @app.exception_handler(Mod97CheckError)
